@@ -14,14 +14,13 @@ import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.ResponseBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 
-@RestController
+@Controller
+@RequestMapping("/user")
 class AuthApi {
     @Autowired
     lateinit var authManager: AuthenticationManager
@@ -35,7 +34,7 @@ class AuthApi {
     @Autowired
     private lateinit var passwordEncoder: PasswordEncoder
 
-    @PostMapping("/todo/auth/login")
+    @PostMapping("/auth/login")
     @ResponseBody
     fun login(@RequestBody @Valid request: AuthRequest): ResponseEntity<ApiResponse> {
         return try {
@@ -53,7 +52,7 @@ class AuthApi {
         }
     }
 
-    @PostMapping("/todo/auth/register")
+    @PostMapping("/auth/register")
     @ResponseBody
     fun registerUser(@RequestBody request: @Valid AuthRequest): ResponseEntity<*>? {
         if (userRepo.findUserByEmail(request.email) != null) {

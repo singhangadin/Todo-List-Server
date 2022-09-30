@@ -11,18 +11,10 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.*
 
 @Controller
-@RequestMapping("/todo")
+@RequestMapping("/task")
 class MainController {
 
     @Autowired
@@ -35,7 +27,7 @@ class MainController {
         return ResponseEntity.ok(ApiResponse.Success(savedTask.toDomain()))
     }
 
-    @GetMapping
+    @GetMapping("/all")
     @ResponseBody
     fun getAllTask(): ResponseEntity<ApiResponse> {
         val tasks = taskRepository.findAll().toList()

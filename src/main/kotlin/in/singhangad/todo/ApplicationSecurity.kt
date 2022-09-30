@@ -53,7 +53,7 @@ class ApplicationSecurity {
         http.csrf().disable()
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         http.authorizeRequests()
-            .antMatchers("/todo/auth/login", "/todo/auth/register", "/docs/**", "/users").permitAll()
+            .antMatchers("/user/auth/login", "/user/auth/register", "/docs/**", "/users").permitAll()
             .anyRequest().authenticated()
         http.exceptionHandling()
             .authenticationEntryPoint { _: HttpServletRequest?, response: HttpServletResponse, ex: AuthenticationException ->
