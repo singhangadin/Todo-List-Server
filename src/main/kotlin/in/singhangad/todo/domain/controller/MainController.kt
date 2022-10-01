@@ -48,7 +48,7 @@ class MainController {
     @PutMapping("/{id}")
     fun updateTask(@PathVariable id: Long, @RequestBody task: UpdateTaskRequest): ResponseEntity<ApiResponse> {
         val savedTask = taskRepository.findByIdOrNull(id)
-        return if (task.taskTitle.isNullOrBlank()) {
+        return if (task.taskTitle.isBlank()) {
             ResponseEntity(ApiResponse.Error("Title must not be null or empty"), HttpStatus.BAD_REQUEST)
         } else if (task.isPinned == null) {
             ResponseEntity(ApiResponse.Error("Property isPinned is missing"), HttpStatus.BAD_REQUEST)
