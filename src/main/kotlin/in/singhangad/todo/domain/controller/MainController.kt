@@ -94,7 +94,7 @@ class MainController {
         val savedTask = taskRepository.findByIdOrNull(id)
         return if (savedTask != null) {
             taskRepository.deleteById(id)
-            ResponseEntity.ok(ApiResponse.Success(Unit))
+            ResponseEntity.ok(ApiResponse.Success("Task deleted"))
         } else {
             ResponseEntity(ApiResponse.Error("Data not found"), HttpStatus.NOT_FOUND)
         }
